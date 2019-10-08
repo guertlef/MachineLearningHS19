@@ -36,8 +36,13 @@
 		\medskip
 		\begin{enumerate}[(\itshape a\normalfont)]
 			\item Consider the function $h:\mathbb{R}^n \rightarrow \mathbb{R}$ and $h(x) = x^TQx\text{, where } Q\in\mathbb{R}^{n\times n}$ is a symmetric matrix. Calculate $\nabla h(x)$.
-			\item Consider the function $f:\mathbb{R}^n \rightarrow \mathbb{R}$ where $f(x) = \|Ax-b\|^2 \text{, } A\in\mathbb{R}^{m\times n}$ and $b\in\mathbb{R}^m$.\\ Calculate $\nabla h(x)$.
+			\item Consider the function $h:\mathbb{R}^n \rightarrow \mathbb{R}$ where $h(x) = \|Ax-b\|^2 \text{, } A\in\mathbb{R}^{m\times n}$ and $b\in\mathbb{R}^m$.\\ Calculate $\nabla h(x)$.
 			\item Consider the function $f:\mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A\in\mathbb{R}^{n\times m}$ and a vector $x\in\mathbb{R}^m$. Calculate $\nabla_x f(Ax)$ as a function of $\nabla_x f(x)$. 
+			\item Show that
+			\begin{equation*}
+			\frac{\partial}{\partial X}\sum_{i=1}^{n}\lambda_i = I
+			\end{equation*}
+			where $X\in\mathbb{R}^{n\times n}$ and has eigenvalues $\lambda_1,...,\lambda_i$.
 			\item Show that
 			\begin{equation*}
 				\frac{\partial}{\partial X}\prod_{i=1}^{n}\lambda_i = det(X)X^{-T}
@@ -45,14 +50,49 @@
 			where $X\in\mathbb{R}^{n\times n}$ and has eigenvalues $\lambda_1,...,\lambda_i$.
 		\end{enumerate}
 	\end{problem}
+	\paragraph{Solution:}
+	\begin{enumerate}[(\itshape a\normalfont)]
+		\item Using product rule
+		\begin{equation*}
+			\nabla_x (f(x)^Tg(x)) = \nabla_x(f)g + \nabla_x(g) f
+		\end{equation*}
+		Let $f(x) = x$ and $g(x) = Qx$ and calculate gradient
+		\begin{align*}
+			\nabla h(x) &= \frac{\partial f(x)}{\partial x}^T g + \frac{\partial g(x)}{\partial x}^T f \\
+			&= 1^T\cdot Qx + Q^T x \\
+			&= x(Q+Q^T) \qquad\qquad\text{Q symmetric so} Q^T=Q\\
+			&= x(Q+Q) = 2Qx
+		\end{align*}
+		\item Let $f(x) = Ax-b $ and $g(z) = \|z\|^2 = z^Tz$. Then $Df(x) = A$ and $Dg(z) = 2z$.
+		\begin{equation*}
+			Dh(x) = Dg(f(x)) = Dg(z)^TDf(x) = 2z^T A = 2(Ax-b)^TA
+		\end{equation*}
+		\begin{equation*}
+			\nabla h(x) = Dh(x)^T = (2(Ax-b)^TA)^T = 2A^T(Ax-b)
+		\end{equation*}
+		\item  %TODO
+		\item 
+		\begin{equation*}
+		\frac{\partial}{\partial X}\sum_{i=1}^{n}\lambda_i = \frac{\partial}{\partial X}tr(X) = tr(\frac{\partial}{\partial X} X) = tr(J) = I
+		\end{equation*}
+		\item
+		\begin{equation*}
+		\frac{\partial}{\partial X}\prod_{i=1}^{n}\lambda_i = \frac{\partial}{\partial X}det(X) = adj(X)^T = (det(X)X^{-1})^T = det(X)X^{-T}
+		\end{equation*}
+		
+	\end{enumerate}
 
 	\section*{Question 2 (15 points)}
 	\begin{problem}
 		Assume $A\in\mathbb{R}^{m\times n},\space X\in\mathbb{R}^{m\times n}$ and $B\in\mathbb{R}^{m\times n}$. Show that $\nabla_X tr(AX^TB) = BA$.
 	\end{problem}
+	\paragraph{Solution:} 
+	\begin{equation*}
+		\nabla_X tr(AX^TB) = tr(\nabla_X (AX^TB)) = tr(A(\nabla_X X)^T B) 
+		= tr(A(J^{ij})^TB) = tr(AJ^{ji}B) = BA
+	\end{equation*}
 	
-	
-	\section*{Question 3 (15 points)}
+	\section*{Question 3 (30 points)}
 	\begin{problem}
 		Solve the following equality constrained optimization problem:
 		\begin{equation*}
@@ -60,5 +100,17 @@
 		\end{equation*}
 		for a symmetric matrix $A\in\mathbb{S}^n$. Assume that A is invertible and $b\ne 0$.
 	\end{problem}
+	\paragraph{Solution:} Form Lagrangian $\mathcal{L}(x,\lambda) = f(x) - \lambda (g(x))$ with $f(x) = x^TAx$ and $g(x) = b^Tx-1$.
+	\begin{equation*}
+		\mathcal{L}(x,\lambda) = x^TAx - \lambda(b^Tx-1)
+	\end{equation*}
+	The gradient of Lagrangian has to be zero at $x^*$.
+	\begin{equation*}
+		\nabla_x\mathcal{L}(x,\lambda) = \nabla_x(x^TAx-\lambda(b^Tx-1)) = 2Ax - \lambda b = 0
+	\end{equation*}
+	This gives us $Ax = \frac{\lambda}{2}b$. Multiply with $A^{-1}$ on the left gives
+	\begin{equation*}
+		x = \frac{\lambda}{2} A^{-T}b
+	\end{equation*}
 	
 \end{document}
