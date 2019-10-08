@@ -1,0 +1,64 @@
+\documentclass[
+	10pt, % Default font size, values between 10pt-12pt are allowed
+]{../fphw}
+
+% Template-specific packages
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage{graphicx} % Required for including images
+\usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{listings} % Required for insertion of code
+\usepackage{enumerate} % To modify the enumerate environment
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Calculus Review} % Assignment title
+\author{Fabienne Guertler 12-935-508} % Student name
+\date{October 9th, 2019} % Due date
+\institute{University of Bern} % Institute or school name
+\class{Machine Learning} % Course or class name
+
+\begin{document}
+	\maketitle
+	\section*{Question 1 }
+	\begin{problem}
+		Consider the function $g:\mathbb{R}^n \rightarrow \mathbb{R}$ with $g(x) = x^Tx$. We can readily calculate the gradient $\nabla g(x) = 2x$ by noticing that
+		\begin{equation*}
+			\forall j=1,...,n
+			\quad
+			\frac{\partial x^Tx}{\partial x_j} = \frac{\partial x_j^2}{\partial x_j} = 2x_j \rightarrow \nabla g(x) = 2x
+		\end{equation*} 
+		Consider also the function $a:\mathbb{R}^n \rightarrow \mathbb{R}^m$ with $a(x) = Ax$ and $A \in \mathbb{R}^{m \times n}$. The Jakobian of $a(x)$ is $Da(x) = a$. Given this, answer the following questions.
+		\medskip
+		\begin{enumerate}[(\itshape a\normalfont)]
+			\item Consider the function $h:\mathbb{R}^n \rightarrow \mathbb{R}$ and $h(x) = x^TQx\text{, where } Q\in\mathbb{R}^{n\times n}$ is a symmetric matrix. Calculate $\nabla h(x)$.
+			\item Consider the function $f:\mathbb{R}^n \rightarrow \mathbb{R}$ where $f(x) = \|Ax-b\|^2 \text{, } A\in\mathbb{R}^{m\times n}$ and $b\in\mathbb{R}^m$.\\ Calculate $\nabla h(x)$.
+			\item Consider the function $f:\mathbb{R}^n \rightarrow \mathbb{R}$. Suppose we have a matrix $A\in\mathbb{R}^{n\times m}$ and a vector $x\in\mathbb{R}^m$. Calculate $\nabla_x f(Ax)$ as a function of $\nabla_x f(x)$. 
+			\item Show that
+			\begin{equation*}
+				\frac{\partial}{\partial X}\prod_{i=1}^{n}\lambda_i = det(X)X^{-T}
+			\end{equation*}
+			where $X\in\mathbb{R}^{n\times n}$ and has eigenvalues $\lambda_1,...,\lambda_i$.
+		\end{enumerate}
+	\end{problem}
+
+	\section*{Question 2 (15 points)}
+	\begin{problem}
+		Assume $A\in\mathbb{R}^{m\times n},\space X\in\mathbb{R}^{m\times n}$ and $B\in\mathbb{R}^{m\times n}$. Show that $\nabla_X tr(AX^TB) = BA$.
+	\end{problem}
+	
+	
+	\section*{Question 3 (15 points)}
+	\begin{problem}
+		Solve the following equality constrained optimization problem:
+		\begin{equation*}
+			\max_{x\in\mathbb{R}^n}x^TAx \quad \text{subject to } b^Tx = 1
+		\end{equation*}
+		for a symmetric matrix $A\in\mathbb{S}^n$. Assume that A is invertible and $b\ne 0$.
+	\end{problem}
+	
+\end{document}
