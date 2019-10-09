@@ -29,16 +29,29 @@
 		Show that the covariance matrix is always symmetric and positive semidefinite.
 	\end{problem}
 	\paragraph{Solution:} A matrix A is positive semidefinite if $x^TAx \ge 0$ for all $x\in\mathbb{R}^n$.\\
-	Covariance matrix $\Sigma = cov[X,X] = E[XX^T] + E[X]E[X]^T$ with $X\in\mathbb{R}^n$.
+	Covariance matrix $\Sigma = cov[X,X] = E[XX^T] + E[X]E[X]^T$ with $X\in\mathbb{R}^n$. Using $Cov[X,X] = Var[X]$ we get
 	\begin{align*}
-		u^T\Sigma u &= u^T(E[XX^T]+E[X]E[X]^T)u\\
-		&= u^TE[XX^T]u + u^TE[X]E[X]^Tu
+		u^TVar[X]u = Var[uX] 
 	\end{align*}
+	Because variance is always non-negative, we get $u^TVar[X]u \ge 0$.
+	A matrix that is positive-semidefinite is automatically symmetric.
 	
 	\section*{Question 2 (20 points)}
 	\begin{problem}
 		$X\in R^n\text{ and }Y\in R^m$ are independent random variables. Their expectations and covariances are $E[X] = 0, Cov[X] = I, E[Y] = \mu\text{, and } Cov[Y]=\sigma I$, where $I$ is the identity matrix of the appropriate size and $\sigma$ is a scalar. What is the expectation and covariance of the random variable $Z = AX + Y$ , where $A\in R^{m\times n}$?
 	\end{problem}
+	\paragraph{Solution:} Expectation for random variable Z is
+	\begin{equation*}
+		E[Z] = E[AX+Y] = AE[X]+E[Y] = A\cdot 0 + \mu = \mu
+	\end{equation*}
+	the variance of Z
+	\begin{equation*}
+		Var[Z] = Var[AX+Y] = Var[AX] + Var[Y] + 2Cov[X,Y]
+	\end{equation*}
+	Because $X,Y$ are independent random variables $Cov[X,Y]$ is 0. This leads to
+	\begin{equation*}
+		Var[Z] = Var[AX] + Var[Y] = AVar[X]A^T + Var[Y] = AIA^T + \sigma I = I(A^TA + \sigma)
+	\end{equation*}
 
 	\section*{Question 3 (15 points)}
 	\begin{problem}
@@ -95,6 +108,22 @@
 			= \frac{(2\pi)^{n/2}|A|^{-1/2}}{e^{c-\frac{1}{2}b^TA^{-1}b}}
 		\end{equation*}
 	\end{problem}
+	\paragraph{Solution:} We know that the integral of the Gaussian probability density function on a random variable with mean $\mu$ and covariance $\Sigma$ is 1.
+	\begin{equation*}
+		\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\int_{x\in\mathbb{R}^n}\exp(-\frac{1}{2} (x-\mu)^T\Sigma^{-1}(x-\mu)) = 1
+	\end{equation*}
+	\begin{equation*}
+		-\frac{1}{2}x^TAx - x^Tb - c = -\frac{1}{2}(x+A^{-1}b)^TA(x+A^{-1}b) - c + \frac{1}{2}b^TA^{-1}b
+	\end{equation*}
+	We can factor out the terms not including x
+	\begin{align*}
+		\int\exp(-\frac{1}{2}x^TAx-x^Tb-c)dx &= \int\exp(-\frac{1}{2}(x+A^{-1}b)^TA(x+A^{-1}b) - c + \frac{1}{2}b^TA^{-1}b) dx\\
+		&= \exp(- c + \frac{1}{2}b^TA^{-1}b) \cdot \int\exp(-\frac{1}{2}(x+A^{-1}b)^TA(x+A^{-1}b))dx
+	\end{align*}
+	We use $\int\exp(-\frac{1}{2} (x-\mu)^T\Sigma^{-1}(x-\mu))dx = (2\pi)^{n/2}|\Sigma|^{1/2}$ and $\Sigma = A^{-1}$ to get rid of the remaining integral and get
+	\begin{equation*}
+		\int\exp(-\frac{1}{2}x^TAx-x^Tb-c)dx = \frac{(2\pi)^{n/2}|A|^{-1/2}}{e^{c-\frac{1}{2}b^TA^{-1}b}}
+	\end{equation*}
 
 	\section*{Question 6 (10 points)}
 	\begin{problem}
