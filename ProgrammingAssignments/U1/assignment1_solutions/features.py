@@ -25,8 +25,12 @@ def hog_features(X):
         #                                                                     #
         #######################################################################
 
-        pass
-
+        img = np.reshape(X[i,1:], [24,24], order='F')
+        
+        hog_feat = hog(img, orientations=6, pixels_per_cell=(4,4), 
+                       cells_per_block=(1,1), block_norm='L2-Hys')
+        
+        hog_list.append(hog_feat)
         #######################################################################
         #                         END OF YOUR CODE                            #
         #######################################################################

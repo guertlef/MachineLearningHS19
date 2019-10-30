@@ -24,9 +24,13 @@ def gradient_function(theta, X, y):
     # derivatives of the cost w.r.t. each parameter in theta              #
     #                                                                     #
     #######################################################################
+    # if X is vector
+    if len(X.shape) == 1:
+        X = X[np.newaxis, :]
     
-    pass
-
+    h = tanh(np.dot(X, theta))
+    grad = 2*np.dot((h-y)*(1-h*h), X)
+    grad /= X.shape[0]
     #######################################################################
     #                         END OF YOUR CODE                            #
     #######################################################################

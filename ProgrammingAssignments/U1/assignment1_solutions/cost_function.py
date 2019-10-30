@@ -23,8 +23,9 @@ def cost_function(theta, X, y):
     # theta.                                                              #
     #                                                                     #
     #######################################################################
-    
-    pass
+    thetaX = np.dot(X, theta)
+    g = tanh(thetaX)-y
+    l = np.sum(g*g) / X.shape[0]
     
     #######################################################################
     #                         END OF YOUR CODE                            #

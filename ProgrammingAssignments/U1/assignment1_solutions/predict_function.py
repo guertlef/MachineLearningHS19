@@ -18,8 +18,14 @@ def predict_function(theta, X, y=None):
     #                                                                     #
     #######################################################################
     
-    pass
+    #preds = np.around(tanh(np.dot(X, theta)))
+    h = tanh(np.dot(X, theta))
+    preds = np.where(h > 0, 1, -1)
     
+    if (y.any != None):
+        accuracy = (np.sum(preds==y)/y.shape[0]) * 100
+    
+
     #######################################################################
     #                         END OF YOUR CODE                            #
     #######################################################################

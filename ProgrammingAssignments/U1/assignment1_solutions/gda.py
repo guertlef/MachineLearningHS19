@@ -30,9 +30,16 @@ def gda(X, y):
     # Perform GDA:                                                        #
     #   - Compute the values for phi, mu_0, mu_1 and sigma                #
     #                                                                     #
-    #######################################################################
-
-    pass
+    #######################################################################    
+    phi = float(np.sum(y==1)) / X.shape[0]
+    
+    mu_0 = np.sum(X[y==-1], axis=0) / np.sum(1*(y==-1))
+    mu_1 = np.sum(X[y==1], axis=0) / np.sum(y==1)
+    
+    y = y[:, np.newaxis]
+    matrix = (X - ((1 - y) * mu_0 + y * mu_1))
+    # covariance matrix
+    sigma = np.dot(matrix.T,matrix) / X.shape[0]
 
     #######################################################################
     #                         END OF YOUR CODE                            #

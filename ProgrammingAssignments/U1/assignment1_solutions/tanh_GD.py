@@ -1,6 +1,7 @@
 from cost_function import cost_function
 from gradient_function import gradient_function
 import numpy as np
+from sklearn import preprocessing
 import time
 
 
@@ -31,9 +32,11 @@ def tanh_GD(X, y, num_iter=10000, alpha=0.01):
         #   - Update theta based on alpha and using gradient_function         #
         #                                                                     #
         #######################################################################
-
-        pass
-
+                        
+        grad = gradient_function(theta, X, y)
+        
+        theta -= np.multiply(alpha, grad)
+        
         #######################################################################
         #                         END OF YOUR CODE                            #
         #######################################################################
