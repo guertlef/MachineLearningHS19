@@ -23,7 +23,9 @@ def svm_loss(w, b, X, y, C):
     # Compute and return the value of the unconstrained SVM objective     #
     #                                                                     #
     #######################################################################
-
+    lamda = 1./C
+    f = np.dot(X,w)-b
+    l = lamda/2 * np.inner(w,w) + np.sum(np.maximum(0, 1-y*f))/X.shape[0]
     #######################################################################
     #                         END OF YOUR CODE                            #
     #######################################################################
