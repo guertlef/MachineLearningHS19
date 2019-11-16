@@ -28,7 +28,8 @@ def svm_gradient(w, b, x, y, C):
     # partial derivatives of the cost w.r.t. both parameters              #
     #                                                                     #
     #######################################################################
-
+    grad_b = np.sum(np.maximum(0, -y)) / y.shape
+    grad_w = w/C + np.sum(np.maximum(0, -np.dot(y,x))) / y.shape
 
     #######################################################################
     #                         END OF YOUR CODE                            #
