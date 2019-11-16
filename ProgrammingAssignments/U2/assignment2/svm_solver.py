@@ -36,18 +36,20 @@ def svm_solver(X, y, C, num_iter=5000, num_per_batch=32):
         #######################################################################
 
         # 1st Step: Sample a random mini-batch of size num_per_batch
-        
-        
+        randIndex = np.random.choice(np.arange(X.shape[0]), size=num_per_batch)
+        miniBatch_X = np.take(X, randIndex, axis=0)
+        miniBatch_y = np.take(y, randIndex, axis=0)
 
         # 2nd Step: Compute the learning-rate n_t=1/(lambda*t) where lambda=1/C
-
+        n_t = C/(t+1.)
         
         
         # 3rd Step: Compute the gradients and update the parameters as
         # w:=w-n_t*grad_w and b:=b-n_t*grad_b
+        grad_w, grad_b = svm_gradient(w, b, miniBatch_X, miniBatch_y, C)
         
-        
-
+        w = w - n_t*grad_w
+        b = b - n_t*grad_b
 
         #######################################################################
         #                         END OF YOUR CODE                            #
